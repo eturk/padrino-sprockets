@@ -8,7 +8,7 @@ module Sprockets
     end
 
     def evaluate(context, locals, &block)
-      JSMin.minify(data)
+      Uglifier.compile(data)
     end
   end
 end
@@ -69,7 +69,7 @@ module Padrino
           else
             puts "Add yui-compressor to your Gemfile to enable css compression"
           end
-          if defined?(JSMin)
+          if defined?(Uglifier)
             @environment.register_postprocessor "application/javascript", ::Sprockets::JSMinifier
           else
             puts "Add jsmin to your Gemfile to enable minification"
